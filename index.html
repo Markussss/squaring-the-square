@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Squaring the square</title>
+    <meta charset='utf-8'>
+    <style>
+    #bw {
+      width: 100%;
+    }
+    #bw div {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      vertical-align: middle;
+      text-align: center;
+      font-family: Roboto;
+      transition: transform 2s;
+    }
+    #box {
+      background-color: #85144B;
+      color: #ee90be;
+    }
+    #box2 {
+      background-color: #FF4136;
+      color: #510500;
+    }
+    </style>
+  </head>
+  <body>
+    <p>When a box is presented a screen with square proportions, they often look like they are rectangles. This is mainly because of an illusion called the <a href='https://en.wikipedia.org/wiki/Vertical%E2%80%93horizontal_illusion'>Vertical-horizontal illusion</a>. I made this tool to have an easy way to make squares look more square.</p>
+    Width: <input type='text' id='insq' name='in16' value='16' onkeyup='calculate()'>
+    Height: <input type='text' id='outsq' name='out9' disabled='disabled'>
+    <button type='button' onclick='rotate()'>Rotate</button>
+    <div id='bw'>
+      <div id='box'></div>
+      <div id='box2'></div>
+    </div>
+    <script type='text/javascript'>
+      var deg = 90;
+      function rotate() {
+        var b1 = document.getElementById('box'),
+        b2 = document.getElementById('box2');
+        b1.style.transform = b2.style.transform = 'rotate('+deg+'deg)'
+        deg = (deg + 90);
+      }
+      function calculate() {
+        var w, h;
+        w = parseInt(document.getElementById('insq').value);
+        h = Math.ceil(w * (15/16))+1,
+        b1 = document.getElementById('box'),
+        b2 = document.getElementById('box2');
+        document.getElementById('outsq').value = h;
+        b1.style.height = h + "px";
+        b1.style.width = b2.style.width = w + "px";
+        b1.style.lineHeight = b2.style.lineHeight = h + "px";
+        b1.style.fontSize = b2.style.fontSize = w/4 + "px";
+        b2.style.height = w + "px";
+        b1.innerHTML = w + "x" + h;
+        b2.innerHTML = w + "x" + w;
+      }
+      calculate();
+    </script>
+  </body>
+</html>
